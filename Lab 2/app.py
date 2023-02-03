@@ -1,9 +1,9 @@
 from flask import Flask
-app = Flask(__name__)
+from flask import make_response, render_template
+from flask import request
 
-@app.route('/')
-def index():
-    return 'Hello World!'
+
+app = Flask(__name__)
 
 @app.route('/users/<username>')
 def show_user(username):
@@ -11,21 +11,11 @@ def show_user(username):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        return "Login com Sucesso"
-# handle login logic
-    else: 
-        return 'Tente outra vez'
-        # show login form
-
-from flask import request
-@app.route('/login', methods=['POST'])
-def login():
     username = request.form['username']
     password = request.form['password']
 # handle login logic
 
-from flask import make_response, render_template
+
 @app.route('/')
 def index():
     response = make_response('Hello World!')
