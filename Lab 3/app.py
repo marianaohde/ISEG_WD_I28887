@@ -7,12 +7,14 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = "your_secret_key"
+
 @app.route("/form", methods=["GET", "POST"])
 def form():
     if request.method == "POST":
         name = request.form["name"]
         return "Hello " + name
-    return render_template("index.html")
+    return render_template("form.html")
 
 class NameForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
@@ -24,10 +26,10 @@ def form():
     if request.method == "POST" and form.validate_on_submit():
         name = form.name.data
         return "Hello " + name
-    return render_template("index.html", form=form)
+    return render_template("form.html", form=form)
 
-app.config["SECRET_KEY"] = "your_secret_key"
+app.run()
 
 csrf = CSRFProtect(app)
 
-app.run()
+
