@@ -9,13 +9,6 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "your_secret_key"
 
-@app.route("/form", methods=["GET", "POST"])
-def form():
-    if request.method == "POST":
-        name = request.form["name"]
-        return "Hello " + name
-    return render_template("form.html")
-
 class NameForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     submit = SubmitField("Submit")
