@@ -1,0 +1,23 @@
+
+1. Can you describe how user authentication and authorization is implemented in each project? 
+No project 1, a autenticação e a autorização são realizadas na app.py, na função ‘login:’. Dentro da função é invocado o ‘LoginForm’ que valida o username e password.
+Já no project 2 estas duas funcionalidades são realizadas no controllers, na função ‘login:’, mais concretamente no seguinte pedaço de código:
+user = models.get_user(email, password)
+        if user:
+            session["user_id"] = user[0]
+            return redirect(url_for("controller.profile"))
+        else:
+            return "Incorrect email or password. Please try again."
+    return views.login()
+
+2. Can you describe how user posts and comments are implemented in Project 1? 
+Estas funcionalidades são implementadas nas funções ‘comment’, ‘post’, sendo que ambas são usadas na função ‘feed’.
+
+3. Can you describe how the search feature is implemented in project 1? 
+A funcionalidade de pesquisa é implementada na função ‘search’ nomeadamente nos c.execute onde é filtrado o conteúdo da base de dados, das tabelas “post” e “comments”. A apresentação dos resultados é realizada pelo comando ‘c.fetchall()’.
+
+4. Can you describe how user photos are uploaded on project 2? 
+O upload das fotos de perfil é realizado através da interação das funções ‘register_user’ (localizada no models, onde é inserida) e ‘register’ (localizada na app, onde é guardada). 
+
+5. Can you describe how the MVC architecture was implemented in project 2?
+A arquitetura do MVC foi separada em models, views e controllers. Nos models são definidas as funções que interagem com a base de dados. No ficheiro views é definido o html para cada ação que o utilizador realize. No controllers são definidas as ações para cada routes, neste ficheiro também é feita a ligação com os models e views. 
